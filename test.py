@@ -34,9 +34,6 @@ class Led_Setup(object):
 # appインスタンス生成
 app = Flask(__name__)
 
-# LEDインスタンス生成
-led = Led_Setup()
-
 @app.route('/')
 def index():
     title = 'Welcome'
@@ -71,3 +68,5 @@ def post():
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000, threaded=True)
+    # LEDインスタンス生成
+    led = Led_Setup()
