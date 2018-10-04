@@ -67,7 +67,6 @@ def post():
 
 if __name__ == '__main__':
     app.debug = True
+    led = Led_Setup()
     app.run(host='0.0.0.0', port=8000, threaded=True)
     print('led start')
-    # LEDインスタンス生成
-    led = Led_Setup()
