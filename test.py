@@ -11,7 +11,7 @@ def index():
 
     return render_template('index.html',message=message,title=title)
 
-@app.route('/post',methods['GET','POST'])
+@app.route('/post',methods=['GET','POST'])
 def post():
     title = 'Hello'
     if request.method == 'POST':
@@ -24,4 +24,4 @@ def post():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='localhost', port=3000, threaded=True)
+    app.run(host='localhost', port=8000, threaded=True)
