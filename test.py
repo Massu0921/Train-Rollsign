@@ -31,11 +31,11 @@ class Led_Setup(object):
         self._width  = self.canvas.width
         self._height = self.canvas.height
 
-# LEDインスタンス生成
-led = Led_Setup()
-
 # appインスタンス生成
 app = Flask(__name__)
+
+# LEDインスタンス生成
+led = Led_Setup()
 
 @app.route('/')
 def index():
