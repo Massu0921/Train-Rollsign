@@ -16,3 +16,12 @@ def post():
     title = 'Hello'
     if request.method == 'POST':
         name = request.form['name']
+        # レンダリング
+        return render_template('index.html',name=name, title=title)
+    else:
+        # リダイレクト
+        return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='localhost', port=3000, threaded=True)
