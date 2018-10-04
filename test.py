@@ -1,10 +1,10 @@
 # coding: utf-8
 import sys,os,time
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
+#sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
 from flask import Flask, render_template, request, redirect, url_for
-from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
+#from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from PIL import Image, ImageDraw, ImageSequence
-
+"""
 class Led_Setup(object):
 
     # Setup LEDs
@@ -30,7 +30,7 @@ class Led_Setup(object):
         # LED長さ
         self._width  = self.canvas.width
         self._height = self.canvas.height
-
+"""
 # appインスタンス生成
 app = Flask(__name__)
 
@@ -47,6 +47,7 @@ def post():
     if request.method == 'POST':
         name = request.form['name']
         text = name + u'さん、ようこそ'
+        """
         x = led._width
         while 1:
             led.canvas.Clear()
@@ -58,6 +59,7 @@ def post():
             x -= 1
             time.sleep(0.01)
             led.canvas = led.matrix.SwapOnVSync(led.canvas)
+        """
 
         # レンダリング
         return render_template('index.html',name=name, title=title)
@@ -67,6 +69,5 @@ def post():
 
 if __name__ == '__main__':
     app.debug = True
-    led = Led_Setup()
+    #led = Led_Setup()
     app.run(host='0.0.0.0', port=8000, threaded=True)
-    print('led start')
