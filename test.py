@@ -1,7 +1,7 @@
 # coding: utf-8
 import sys,os,time
-from modules import LED
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
+from modules import LED
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image, ImageDraw, ImageSequence
 
