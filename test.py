@@ -1,5 +1,6 @@
 # coding: utf-8
 import sys,os,time
+from modules import LED
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image, ImageDraw, ImageSequence
@@ -10,15 +11,18 @@ app = Flask(__name__)
 def index():
     title = 'Welcome'
     message = 'Text Message'
+    led = LED.setup()
 
     return render_template('index.html',message=message,title=title)
 
 @app.route('/post',methods=['GET','POST'])
 def post():
+    global led
     title = 'Hello'
     if request.method == 'POST':
         name = request.form['name']
         text = name + u'さん、ようこそ'
+        led.scroll_text(text)
 
         # レンダリング
         return render_template('index.html',name=name, title=title)

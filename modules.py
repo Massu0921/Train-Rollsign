@@ -28,7 +28,7 @@ class LED(object):
         self._width  = self.canvas.width
         self._height = self.canvas.height
 
-    def scroll_text(self):
+    def scroll_text(self,text):
         x = led._width
         while 1:
             led.canvas.Clear()
