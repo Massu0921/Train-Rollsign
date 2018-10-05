@@ -13,7 +13,9 @@ def index():
     global led
     title = 'Welcome'
     message = 'Text Message'
-    led = LED()
+
+    if led == None:
+        led = LED()
 
     return render_template('index.html',message=message,title=title)
 
