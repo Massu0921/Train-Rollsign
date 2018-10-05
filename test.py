@@ -44,7 +44,7 @@ if __name__ == '__main__':
     host = '0.0.0.0'
     port = 8000
     threaded = True
-    app_th = threading.Thread(target=led.app.run,args=(host,port,threaded,))
+    app_th = threading.Thread(target=app.run,args=(host,port,threaded,))
     app_th.setDaemon(True)
     app_th.start()
 
