@@ -23,7 +23,9 @@ def post():
     if request.method == 'POST':
         name = request.form['name']
         text = name + u'さん、ようこそ'
-        led.scroll_text(text)
+        try:
+            led.scroll_text(text)
+        except: pass
 
         # レンダリング
         return render_template('index.html',name=name, title=title)
