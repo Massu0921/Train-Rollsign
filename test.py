@@ -19,6 +19,7 @@ def index():
 
 @app.route('/post',methods=['GET','POST'])
 def post():
+    global led
     title = 'Hello'
     if request.method == 'POST':
         name = request.form['name']
