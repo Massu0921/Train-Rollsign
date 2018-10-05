@@ -11,7 +11,7 @@ app = Flask(__name__)
 def index():
     title = 'Welcome'
     message = 'Text Message'
-    led = LED.setup()
+    led = LED()
 
     return render_template('index.html',message=message,title=title)
 

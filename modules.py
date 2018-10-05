@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageSequence
 class LED(object):
 
     # Setup LEDs
-    def setup(self,chain=4,bright=50): # デフォルト設定（引数なしの場合）
+    def __init__(self,chain=4,bright=50): # デフォルト設定（引数なしの場合）
         # Options
         self.options = RGBMatrixOptions()
         self.options.rows = 32
