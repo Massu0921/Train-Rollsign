@@ -9,7 +9,7 @@
     {% else %}
       <title>Bootstrap 101 Template</title>
     {% endif %}
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS読み込み-->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,9 +21,9 @@
   </head>
   <body>
     {% block content %}{% endblock %}
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery 読み込み (jsより先に読み込む) -->
     <script src="/static/js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Bootstrap js 読み込み -->
     <script src="/static/js/bootstrap.min.js"></script>
   </body>
 </html>
