@@ -72,7 +72,10 @@ class App(LED):
 if __name__ == '__main__':
     led = App()
     led.app.debug = True
-    app_th = threading.Thread(target=led.app.run,args=(host='0.0.0.0', port=8000, threaded=True,))
+    host = '0.0.0.0'
+    port = 8000
+    threaded = True
+    app_th = threading.Thread(target=led.app.run,args=(host,port,threaded,))
     #led.app.run(host='0.0.0.0', port=8000, threaded=True)
     app_th.setDaemon(True)
     app_th.start()
