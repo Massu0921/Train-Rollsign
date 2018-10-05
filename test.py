@@ -12,6 +12,7 @@ def index():
     title = 'Welcome'
     message = 'Text Message'
     led = LED()
+    global led
 
     return render_template('index.html',message=message,title=title)
 
