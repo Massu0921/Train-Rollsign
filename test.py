@@ -25,7 +25,7 @@ def post():
         text = name + u'さん、ようこそ'
         try:
             led.scroll_text(text)
-        except　AttributeError: pass
+        except AttributeError: pass
 
         # レンダリング
         return render_template('index.html',name=name, title=title)
