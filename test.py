@@ -1,9 +1,9 @@
 # coding: utf-8
 import sys,os,time
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
-from modules import LED
+#from modules import LED
 from flask import Flask, render_template, request, redirect, url_for
-from PIL import Image, ImageDraw, ImageSequence
+#from PIL import Image, ImageDraw, ImageSequence
 
 app = Flask(__name__)
 led = None
@@ -13,11 +13,19 @@ def index():
     global led
     title = 'Welcome'
     message = 'Text Message'
-
+    """
     if led == None:
         led = LED()
-
+    """
     return render_template('index.html',message=message,title=title)
+
+@app.route('/E233')
+def E233():
+    return render_template('E233.html')
+
+@app.route('/tobu_10000')
+def tobu_10000():
+    return render_template('tobu_10000.html')
 
 @app.route('/post',methods=['GET','POST'])
 def post():
@@ -26,10 +34,11 @@ def post():
     if request.method == 'POST':
         name = request.form['name']
         text = name + u'さん、ようこそ'
+        """
         try:
             led.scroll_text(text)
         except AttributeError: pass
-
+        """
         # レンダリング
         return render_template('index.html',name=name, title=title)
     else:
