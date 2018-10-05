@@ -14,6 +14,7 @@ def index():
     title = 'Welcome'
     message = 'Text Message'
     led = LED()
+    led.scroll_text(title)
 
     return render_template('index.html',message=message,title=title)
 
