@@ -29,15 +29,15 @@ class LED(object):
         self._height = self.canvas.height
 
     def scroll_text(self,text):
-        x = led._width
+        x = self._width
         while 1:
-            led.canvas.Clear()
-            len = graphics.DrawText(led.canvas, led.gothic, x, 30, led.white, text)
+            self.canvas.Clear()
+            len = graphics.DrawText(self.canvas, self.gothic, x, 30, self.white, text)
             if x + len < 0:
                 break
             x -= 1
             time.sleep(0.01)
-            led.canvas = led.matrix.SwapOnVSync(led.canvas)
+            self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
-        led.canvas.Clear()
-        led.canvas = led.matrix.SwapOnVSync(led.canvas)
+        self.canvas.Clear()
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
