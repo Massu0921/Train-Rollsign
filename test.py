@@ -6,13 +6,13 @@ from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image, ImageDraw, ImageSequence
 
 app = Flask(__name__)
+led = None
 
 @app.route('/')
 def index():
     title = 'Welcome'
     message = 'Text Message'
     led = LED()
-    global led
 
     return render_template('index.html',message=message,title=title)
 
