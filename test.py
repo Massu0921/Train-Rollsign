@@ -5,84 +5,51 @@ from flask import Flask, render_template, request, redirect, url_for
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from PIL import Image, ImageDraw, ImageSequence
 
-class LED(object):
+app = Flask(__name__)
 
-    # Setup LEDs
-    def setup(self,chain=4,bright=50): # デフォルト設定（引数なしの場合）
-        # Options
-        self.options = RGBMatrixOptions()
-        self.options.rows = 32
-        self.options.chain_length = chain
-        self.options.parallel = 1
-        self.options.hardware_mapping = 'adafruit-hat-pwm'
-        self.options.brightness = bright
-        self.options.show_refresh_rate = 0
-        self.matrix = RGBMatrix(options=self.options)
-        self.canvas = self.matrix.CreateFrameCanvas()
+@app.route('/')
+def index(self):
+    title = 'Welcome'
+    message = 'Text Message'
 
-        # テキスト用フォント
-        self.gothic = graphics.Font()
-        self.gothic.LoadFont("Resources/Gothic-16.bdf")
+    return render_template('index.html',message=message,title=title)
 
-        # color
-        self.white  = graphics.Color(255, 255, 255)
-
-        # LED長さ
-        self._width  = self.canvas.width
-        self._height = self.canvas.height
-
-class App(LED):
-    def __init__(self):
-        # appインスタンス生成
-        self.app = Flask(__name__)
-
-    @self.app.route('/')
-    def index(self):
-        title = 'Welcome'
-        message = 'Text Message'
-
-        return render_template('index.html',message=message,title=title)
-
-    @self.app.route('/post',methods=['GET','POST'])
-    def post(self):
-        title = 'Hello'
-        if request.method == 'POST':
-            name = request.form['name']
-            text = name + u'さん、ようこそ'
-
-            x = led._width
-            while 1:
+@app.route('/post',methods=['GET','POST'])
+def post(self):
+    title = 'Hello'
+    if request.method == 'POST':
+        name = request.form['name']
+        text = name + u'さん、ようこそ'
+        """
+        x = led._width
+        while 1:
+            led.canvas.Clear()
+            len = graphics.DrawText(led.canvas, led.gothic, x, 30, led.white, text)
+            if x + len < 0:
                 led.canvas.Clear()
-                len = graphics.DrawText(led.canvas, led.gothic, x, 30, led.white, text)
-                if x + len < 0:
-                    led.canvas.Clear()
-                    led.canvas = led.matrix.SwapOnVSync(led.canvas)
-                    break
-                x -= 1
-                time.sleep(0.01)
                 led.canvas = led.matrix.SwapOnVSync(led.canvas)
-
-
-            # レンダリング
-            return render_template('index.html',name=name, title=title)
-        else:
-            # リダイレクト
-            return redirect(url_for('index'))
+                break
+            x -= 1
+            time.sleep(0.01)
+            led.canvas = led.matrix.SwapOnVSync(led.canvas)
+            """
+        # レンダリング
+        return render_template('index.html',name=name, title=title)
+    else:
+        # リダイレクト
+        return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    led = App()
-    led.app.debug = True
+    app.debug = True
     host = '0.0.0.0'
     port = 8000
     threaded = True
     app_th = threading.Thread(target=led.app.run,args=(host,port,threaded,))
-    #led.app.run(host='0.0.0.0', port=8000, threaded=True)
     app_th.setDaemon(True)
     app_th.start()
 
-    led.setup()
-
     try:
+        print('successful')
         while True:
             time.sleep(100)
     except KeyboardInterrupt:
