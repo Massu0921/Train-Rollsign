@@ -17,7 +17,7 @@ def index():
     if led == None:
         led = LED()
     """
-    return render_template('index.html',message=message,title=title)
+    return render_template('index.html')
 
 @app.route('/E233')
 def E233():
@@ -26,7 +26,7 @@ def E233():
 @app.route('/tobu_10000')
 def tobu_10000():
     return render_template('tobu_10000.html')
-
+"""
 @app.route('/post',methods=['GET','POST'])
 def post():
     global led
@@ -34,17 +34,17 @@ def post():
     if request.method == 'POST':
         name = request.form['name']
         text = name + u'さん、ようこそ'
-        """
+
         try:
             led.scroll_text(text)
         except AttributeError: pass
-        """
+
         # レンダリング
         return render_template('index.html',name=name, title=title)
     else:
         # リダイレクト
         return redirect(url_for('index'))
-
+"""
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0',port=8000,threaded=True)
