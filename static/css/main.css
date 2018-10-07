@@ -1,7 +1,15 @@
-/*電車のサムネ用*/
+
 body {
   background-color: black;
   color: white;
+}
+
+/*リンク付き画像半透明化*/
+a:hover img {
+  transition: .3s; /*透明化までの時間*/
+  opacity: 1; /*透明度*/
+  filter: alpha(opacity=60); /*IE用透明度*/
+  -moz-opacity:0.6; /*旧FireFox用*/
 }
 
 #description {
@@ -12,11 +20,13 @@ body {
   margin: 30px;
 }
 
-
+/*電車のサムネ用*/
 .train-thumb {
+  background-color: white;
   max-width: 100%;
   height:auto;
   object-fit: cover;
+  opacity: 0.6;
 
   position: relative; /*相対位置*/
 
