@@ -1,5 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-<title>E233系列</title>
-<label for="name">E233</label>
+<title>E233系3000番台</title>
+<body>
+  <div id="train-name" class="m-4">
+    <div class="container">
+      <h3>E233系3000番台</h3>
+    </div>
+  </div>
+
+  <div class="rollsign">
+    <div class="container">
+      <div id="rollsign-1" class="row">
+        <div class="kind col-xs-4 col-md-4">
+          <a href="#" class="bt-up"></a>
+          <img src="/static/images/local.png" class="rollsign-thumb" alt="local.png">
+          <a href="#" class="bt-down"></a>
+        </div>
+        <div class="for col-xs-8 col-md-8">
+          <a href="#" class="bt-up"></a>
+          <img src="/static/images/utsunomiya.png" class="rollsign-thumb" alt="utsunomiya.png">
+          <a href="#" class="bt-down"></a>
+        </div>
+        </div>
+      </div>
+    </div>
+</body>
 {% endblock %}

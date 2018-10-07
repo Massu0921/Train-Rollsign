@@ -1,7 +1,23 @@
-
+/*style.cssにするとバグるので、main.cssに*/
 body {
   background-color: black;
   color: white;
+}
+
+/*選択禁止*/
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+/*ナビゲーションバー用*/
+.nav-link {
+  data-toggle="collapse" data-target=".navbar-collapse.show";
 }
 
 /*リンク付き画像半透明化*/
@@ -10,14 +26,6 @@ a:hover img {
   opacity: 1; /*透明度*/
   filter: alpha(opacity=60); /*IE用透明度*/
   -moz-opacity:0.6; /*旧FireFox用*/
-}
-
-#description {
-  margin: 50px;
-}
-
-.train-mr {
-  margin: 30px;
 }
 
 /*電車のサムネ用*/
@@ -29,7 +37,7 @@ a:hover img {
   opacity: 0.6;
 
   position: relative; /*相対位置*/
-
+  /*装飾*/
   display: inline-block;
   border: 4px solid #fff;
   border-radius: 4px;
@@ -38,7 +46,7 @@ a:hover img {
 /*画像上のテキスト*/
 .ontext {
   position:	absolute; /* 絶対位置指定 */
-  width:	50%;
+  width:	60%;
 	font-size:	130%;
 	text-align:	center;
   left:     25px; /*左*/
@@ -48,6 +56,32 @@ a:hover img {
 	background:	rgba(0,0,0,0.3); /* 帯の透明度 */
 }
 
-.nav-link {
-  data-toggle="collapse" data-target=".navbar-collapse.show";
+/*方向幕のサムネサイズ*/
+.rollsign-thumb {
+  width: auto;
+  height: 60px;
+  text-align:center;
+}
+
+/*矢印ボタン*/
+.bt-up {
+  margin: auto;
+     display: block;
+     width: 15px;
+     height: 15px;
+     border-top: solid 3px #fff;
+     border-right: solid 3px #fff;
+     -webkit-transform: rotate(-45deg);
+     transform: rotate(-45deg);
+}
+
+.bt-down {
+    margin: auto;
+     display: block;
+     width: 15px;
+     height: 15px;
+     border-top: solid 3px #fff;
+     border-right: solid 3px #fff;
+     -webkit-transform: rotate(135deg);
+     transform: rotate(135deg);
 }
