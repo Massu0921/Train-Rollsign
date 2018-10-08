@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <title>E233系3000番台</title>
+
+<head>
+  <!-- For Rollsign Page -->
+  <link href="/static/css/rollsign.css" rel="stylesheet">
+</head>
+
 <body>
   <div id="train-name" class="m-4">
     <div class="container">
@@ -10,19 +16,24 @@
 
   <div class="rollsign">
     <div class="container">
-      <div id="rollsign-1" class="row">
-        <div class="kind col-xs-4 col-md-4">
-          <a href="#" class="bt-up"></a>
-          <img src="/static/images/local.png" class="rollsign-thumb" alt="local.png">
-          <a href="#" class="bt-down"></a>
+      <div class="row">
+        <div id="rollsign-preview" class="col-xs-12">
+
+        <div id="rollsign-kind" class="col-xs-12">
+
         </div>
-        <div class="for col-xs-8 col-md-8">
-          <a href="#" class="bt-up"></a>
-          <img src="/static/images/utsunomiya.png" class="rollsign-thumb" alt="utsunomiya.png">
-          <a href="#" class="bt-down"></a>
+        <div id="rollsign-destination" class="col-xs-12">
+
         </div>
+        <div id="rollsign-line" class="col-xs-12">
+
+        </div>
+        <div id="rollsign-single" class="col-xs-12">
+
         </div>
       </div>
     </div>
+  </div>
+  <script src="/static/js/main.js"></script>
 </body>
 {% endblock %}

@@ -55,33 +55,3 @@ a:hover img {
 	color:		#fff;
 	background:	rgba(0,0,0,0.3); /* 帯の透明度 */
 }
-
-/*方向幕のサムネサイズ*/
-.rollsign-thumb {
-  width: auto;
-  height: 60px;
-  text-align:center;
-}
-
-/*矢印ボタン*/
-.bt-up {
-  margin: auto;
-     display: block;
-     width: 15px;
-     height: 15px;
-     border-top: solid 3px #fff;
-     border-right: solid 3px #fff;
-     -webkit-transform: rotate(-45deg);
-     transform: rotate(-45deg);
-}
-
-.bt-down {
-    margin: auto;
-     display: block;
-     width: 15px;
-     height: 15px;
-     border-top: solid 3px #fff;
-     border-right: solid 3px #fff;
-     -webkit-transform: rotate(135deg);
-     transform: rotate(135deg);
-}
