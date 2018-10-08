@@ -1,0 +1,7 @@
+/*方向幕のサムネサイズ*/
+.rollsign-thumb {
+  width: auto;
+  height: 60px;
+  display: inline-block;
+  position: relative;
+}
