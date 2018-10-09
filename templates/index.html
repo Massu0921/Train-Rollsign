@@ -1,31 +1,32 @@
 {% extends "layout.html" %}
 {% block content %}
 <title>Train-Rollsign</title>
-<body>
-<div id="description" class="m-4">
-  <div class="container">
-    <h1>Select Trains</h1>
-    <p>行先表示する電車の系列を選択してください。以下の電車の表示が可能です。</p>
-  </div>
-</div>
 
-<div id="trains">
-  <div class="container">
-    <div class="row">
-      <div class="E233 col-md-5 m-4">
-        <a href="E233">
-        <img src="/static/images/E233.jpg" class="train-thumb" alt="E233系">
-        <p class="ontext">E233系3000番台</p>
-      </a>
-      </div>
+<body>
+  <div id="description" class="m-4">
+    <div class="container">
+      <h1>Select Trains</h1>
+      <p>行先表示する電車の系列を選択してください。以下の電車の表示が可能です。</p>
+    </div>
+  </div>
+
+  <div id="trains">
+    <div class="container">
+      <div class="row">
+        <div class="E233 col-md-5 m-4">
+          <a href="E233">
+            <img src="/static/images/E233.jpg" class="train-thumb" alt="E233系">
+            <p class="ontext">E233系3000番台</p>
+          </a>
+        </div>
         <div class="tobu_10000 col-md-5 m-4">
-        <a href="tobu_10000">
-        <img src="/static/images/tobu_10000.jpg" class="train-thumb" alt="東武10000系列">
-        <p class="ontext">東武10000系列<br>リニューアル仕様</p>
-      </a>
+          <a href="tobu_10000">
+            <img src="/static/images/tobu_10000.jpg" class="train-thumb" alt="東武10000系列">
+            <p class="ontext">東武10000系列<br>リニューアル仕様</p>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </body>
 {% endblock %}
