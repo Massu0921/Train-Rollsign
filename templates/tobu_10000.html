@@ -1,10 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 <title>東武10000系列</title>
+
+<head>
+  <!-- For Rollsign Page -->
+  <link href="/static/css/rollsign.css" rel="stylesheet">
+</head>
+
 <body>
-  <div id="train-name" class="m-3">
+  <div id="train-name" class="m-4">
     <div class="container">
       <h3>東武10000系列</h3>
+    </div>
+  </div>
+  <div id="rollsign-1" class="container">
+    <div class="tobu_layer">
+      <img src="/static/images/tobu_10000_type.png" class="rollsign-thumb" style="top: 0px;">
+      <div class="gradient_layer"></div>
     </div>
   </div>
 </body>
