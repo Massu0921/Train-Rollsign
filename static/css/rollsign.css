@@ -1,25 +1,38 @@
 /*方向幕のサムネサイズ*/
 .rollsign-thumb {
-  position: absolute;
+  position: relative;
   width: 128px;
-  left: 0px;
-  margin: 0px;
+
+}
+
+.rollsign-thumb2 {
+  position: relative;
+  width: 128px;
   display: inline-block;
 }
 
 /*方向幕レイヤー*/
 .tobu_layer {
-  position: relative;
+  position: absolute;
   z-index: 2;
   border: 1px solid black;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 192px;
   width: 128px;
   overflow: hidden;
 }
 
 .gradient_layer {
-  position: relative;
+  position: absolute;
   z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   height: 192px;
   width: 128px;
   background: -moz-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
