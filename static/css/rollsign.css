@@ -1,40 +1,25 @@
-/*方向幕のサムネサイズ*/
-.rollsign-thumb {
+/*東武10000系列用*/
+
+#tobu10000{
   position: relative;
-  width: 128px;
-
-}
-
-.rollsign-thumb2 {
-  position: relative;
-  width: 128px;
-  display: inline-block;
-}
-
-/*方向幕レイヤー*/
-.tobu_layer {
-  position: absolute;
-  z-index: 2;
-  border: 1px solid black;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 256px;
   height: 192px;
-  width: 128px;
+  border: 0px solid black;
+  margin: 0 auto;
   overflow: hidden;
 }
 
-.gradient_layer {
+.tobu-thumb {
+  position: absolute;
+  width: 128px;
+}
+
+.tobu-gradient {
   position: absolute;
   z-index: 3;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  margin: 0;
   height: 192px;
-  width: 128px;
+  width: 256px;
   background: -moz-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
   background: -webkit-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
   background: linear-gradient(to bottom, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
