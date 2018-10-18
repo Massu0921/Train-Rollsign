@@ -58,8 +58,8 @@
   left: 56px;
   width: 16px;
   height: 16px;
-  border-top: 4px solid #fff;
-  border-right: 4px solid #fff;
+  border-top: 4px solid #c8c8c8;
+  border-right: 4px solid #c8c8c8;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
@@ -76,8 +76,8 @@
   left: 56px;
   width: 16px;
   height: 16px;
-  border-top: 4px solid #fff;
-  border-right: 4px solid #fff;
+  border-top: 4px solid #c8c8c8;
+  border-right: 4px solid #c8c8c8;
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
 }
