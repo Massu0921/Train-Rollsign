@@ -20,5 +20,5 @@ function scroll() {
     //$("#type").animate({ top: "-=" + (64) + "px" }, { duration: 400 }, { complete: function(){} });
 }
 
-// ボタンが押されたとき1
-$('.btn').on('click', scroll)
+// ボタンが押されたとき
+$('.btn').on('click', scroll);
