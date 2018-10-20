@@ -1,5 +1,5 @@
-var scrolljudge = false;
-
+var click_scl_px = 64;
+var dblclick_scl_px = 192;
 function scroll() {
     var id = $(this).attr("id")
     //alert(id)
@@ -22,21 +22,5 @@ function scroll() {
     //$("#type").animate({ top: "-=" + (64) + "px" }, { duration: 400 }, { complete: function(){} });
 }
 
-function longscroll() {
-    while (scrolljudge) {
-        console.log('down')
-    }
-}
-
-function btndown(){
-    scrolljudge = true;
-}
-
-function btnup(params) {
-    scrolljudge = false;
-}
-
 // ボタンが押されたとき
-$('.btn').on('click', scroll);
-$('.btn').on('mousedown', btndown);
-$('.btn').on('mouseup', x);
+$('.btn').on({ 'click': scroll }, { 'dblclick': scroll });
