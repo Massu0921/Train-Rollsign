@@ -39,7 +39,7 @@ function clickjudge() {
 
     if (clicked) {
         // ダブルクリック時
-        scroll(id,dblclick_scl_px);
+        scroll(id, dblclick_scl_px);
         clicked = false;
         return;
     }
@@ -49,10 +49,10 @@ function clickjudge() {
     setTimeout(function () {
         if (clicked) {
             // シングルクリック時
-            scroll(id,click_scl_px);
+            scroll(id, click_scl_px);
         }
         clicked = false;
-    }, 300);
+    }, 250);
 }
 
 // ボタンがクリックされたとき
