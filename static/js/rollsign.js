@@ -3,7 +3,7 @@ var click_scl_px = 64;   // クリック時スクロール量
 var dblclick_scl_px = 192;  // ダブルクリック時スクロール量
 var dr = 400;  // スクロール時間(ms)
 
-// 座標初期値
+// 座標用(初期値:-64px)
 var type_top = -64;
 var dest_top = -64;
 
@@ -94,6 +94,13 @@ function clickjudge() {
         clicked = false;
     }, 250);
 }
+
+// 初期位置に移動
+// 読み込み後実行
+$(window).on('load',function(){
+    $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
+    $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+});
 
 // ボタンがクリックされたとき
 $('.btn').on('click', clickjudge);
