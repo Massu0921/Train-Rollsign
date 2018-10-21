@@ -20,10 +20,22 @@ var train = [];
 train["tobu10000"] = new limitpx(-384, -1280);    // 東武10000系列
 
 // フォーム送信部
-function sendparam(now_px) {
-    
-}
+/*
+function sendparam(pos) {
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/tobu_10000';
+    document.body.appendChild(form);
 
+    var input = document.createElement('input');
+    input.name = 'position';
+    input.value = pos;
+
+    form.appendChild(input);
+    form.submit();
+
+}
+*/
 // スクロール(click,dblclick時)
 function scroll(id, parentid, scl_px) {
 
@@ -83,6 +95,8 @@ function clickjudge() {
     // ボタンの個別id取得
     var id = $(this).attr("id");
     var parentid = $(this).parent().attr("id");
+    
+    //sendparam(id) //フォーム作成（仮）
 
     if (clicked) {
         // ダブルクリック時
