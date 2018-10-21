@@ -20,8 +20,10 @@
   margin: 0;
   height: 192px;
   width: 256px;
+  /*
   background: -moz-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
   background: -webkit-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
+  */
   background: linear-gradient(to bottom, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
 }
 
@@ -50,7 +52,7 @@
   box-sizing: border-box;
   width: 128px;
   height: 32px;
-  background-color: rgba(255, 255, 255, 0.2);
+  /*background-color: rgba(255, 255, 255, 0.2);*/
   /*border: 1px solid #FFF;*/
 }
 
@@ -68,7 +70,7 @@
   box-sizing: border-box;
   width: 128px;
   height: 32px;
-  background-color: rgba(255, 255, 255, 0.2);
+  /*background-color: rgba(255, 255, 255, 0.2);*/
   /*border: 1px solid #FFF;*/
 }
 
