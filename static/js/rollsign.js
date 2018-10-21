@@ -19,6 +19,12 @@ function limitpx(_type, _dest) {
 var train = [];
 train["tobu10000"] = new limitpx(-384, -1280);    // 東武10000系列
 
+// フォーム送信部
+function sendparam(now_px) {
+    
+}
+
+// スクロール(click,dblclick時)
 function scroll(id, parentid, scl_px) {
 
     // スクロール(id振り分け)
@@ -49,6 +55,7 @@ function scroll(id, parentid, scl_px) {
     $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
 }
 
+// スクロール(長押し時)
 function holdscroll() {
     // id取得
     var id = $(this).attr("id");
@@ -88,7 +95,7 @@ function clickjudge() {
 
     setTimeout(function () {
         if (clicked) {
-            // シングルクリック時
+            // クリック時
             scroll(id, parentid, click_scl_px);
         }
         clicked = false;
