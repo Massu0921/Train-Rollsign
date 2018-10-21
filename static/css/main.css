@@ -16,9 +16,11 @@ body {
 }
 
 /*ナビゲーションバー用*/
+/*
 .nav-link {
   data-toggle="collapse" data-target=".navbar-collapse.show";
 }
+*/
 
 /*リンク付き画像半透明化*/
 a:hover img {
@@ -46,10 +48,9 @@ a:hover img {
 /*画像上のテキスト*/
 .ontext {
   position:	absolute; /* 絶対位置指定 */
-  width:	60%;
-	font-size:	130%;
+	font-size:	120%;
 	text-align:	center;
-  left:     25px; /*左*/
+  left:     50px; /*左*/
 	bottom:		10px; /*下*/
 
 	color:		#fff;
