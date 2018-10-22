@@ -4,7 +4,7 @@ import os
 import time
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
 #from modules import LED
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, json
 #from PIL import Image, ImageDraw, ImageSequence
 
 app = Flask(__name__)
@@ -31,6 +31,17 @@ def E233():
 @app.route('/tobu_10000')
 def tobu_10000():
     return render_template('tobu_10000.html')
+
+
+@app.route('/set', methods=['GET', 'POST'])
+def setimg():
+    train_id = request.json["train_id"]
+    type_pos = request.json["type_pos"]
+    dest_pos = request.json["dest_pos"]
+    app.logger.debug(train_id)
+    app.logger.debug(type_pos)
+    app.logger.debug(dest_pos)
+    return ""
 
 
 """
