@@ -19,23 +19,29 @@ function limitpx(_type, _dest) {
 var train = [];
 train["tobu10000"] = new limitpx(-384, -1280);    // 東武10000系列
 
-// フォーム送信部
-/*
-function sendparam(pos) {
-    var form = document.createElement('form');
-    form.method = 'POST';
-    form.action = '/tobu_10000';
-    document.body.appendChild(form);
+// フォーム送信部 スクロール後に呼び出し
+function senddata(parentid) {
 
-    var input = document.createElement('input');
-    input.name = 'position';
-    input.value = pos;
+    // json用オブジェクト
+    var json = {
+        train_id: parentid,     // 電車のidを取得
+        type_pos: type_top,     // 種別の座標を取得
+        dest_pos: dest_top      // 行先の座標を取得
+    };
 
-    form.appendChild(input);
-    form.submit();
+    // ajaxを用いて非同期通信
+    $.ajax({
+        url: '/set',
+        type: 'post',
+        data: JSON.stringify(json),
+        contentType: 'application/JSON',
+        dataType: 'JSON'
+    });
+
+    //console.log(json);
 
 }
-*/
+
 // スクロール(click,dblclick時)
 function scroll(id, parentid, scl_px) {
 
@@ -65,6 +71,9 @@ function scroll(id, parentid, scl_px) {
 
     $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
     $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+
+    // サーバーにデータ送信
+    senddata(parentid);
 }
 
 // スクロール(長押し時)
@@ -89,14 +98,13 @@ function holdscroll() {
 }
 
 // click,dblclick判定 -> スクロール実行
+// hold時もこの関数は実行されるが、座標変化はしない
 var clicked = false;    // クリック状態を保持するフラグ
 
 function clickjudge() {
     // ボタンの個別id取得
     var id = $(this).attr("id");
     var parentid = $(this).parent().attr("id");
-    
-    //sendparam(id) //フォーム作成（仮）
 
     if (clicked) {
         // ダブルクリック時
@@ -118,7 +126,7 @@ function clickjudge() {
 
 // 初期位置に移動
 // 読み込み後実行
-$(window).on('load',function(){
+$(window).on('load', function () {
     $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
     $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
 });
