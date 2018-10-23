@@ -95,6 +95,9 @@ function holdscroll() {
 
     $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
     $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+
+    // サーバーにデータ送信
+    senddata(parentid);
 }
 
 // click,dblclick判定 -> スクロール実行
