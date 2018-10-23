@@ -40,12 +40,14 @@ def setimg():
     type_pos = request.json["type_pos"]
     dest_pos = request.json["dest_pos"]
     overall_pos = request.json["overall_pos"]
+    overall_flg = request.json["overall_flg"]
 
     # debug
     app.logger.debug(train_id)
     app.logger.debug(type_pos)
     app.logger.debug(dest_pos)
     app.logger.debug(overall_pos)
+    app.logger.debug(overall_flg)
     return ""   # returnで何か返さないとエラー
 
 """
