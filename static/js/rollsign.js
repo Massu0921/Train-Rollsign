@@ -6,18 +6,20 @@ var dr = 400;  // スクロール時間(ms)
 // 座標用(初期値:-64px)
 var type_top = -64;
 var dest_top = -64;
+var overall_top = -64
 
 // 上限・下限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
 
 // 下限設定用コンストラクタ(種別,行先)
-function limitpx(_type, _dest) {
+function limitpx(_type, _dest, _overall) {
     this.type = _type;
     this.dest = _dest;
+    this.overall = _overall;
 }
 // 種類ごとに下限値を設定
 var train = [];
-train["tobu10000"] = new limitpx(-384, -1280);    // 東武10000系列
+train["tobu10000"] = new limitpx(-384, -1280, -448);    // 東武10000系列
 
 // フォーム送信部 スクロール後に呼び出し
 function senddata(parentid) {
@@ -26,7 +28,8 @@ function senddata(parentid) {
     var json = {
         train_id: parentid,     // 電車のidを取得
         type_pos: type_top,     // 種別の座標を取得
-        dest_pos: dest_top      // 行先の座標を取得
+        dest_pos: dest_top,     // 行先の座標を取得
+        overall_pos: overall_top    // 全面表示の座標を取得
     };
 
     // ajaxを用いて非同期通信
@@ -42,10 +45,17 @@ function senddata(parentid) {
 
 }
 
+// アニメーション
+function animation() {
+    $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
+    $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+    $("#overall").animate({ top: overall_top + "px" }, { duration: dr }, { complete: function () { } });
+}
+
 // スクロール(click,dblclick時)
 function scroll(id, parentid, scl_px) {
 
-    // スクロール(id振り分け)
+    // 判定(id振り分け)
     if (id == 'type-up') {
         type_top -= scl_px;
     } else if (id == 'type-down') {
@@ -54,6 +64,10 @@ function scroll(id, parentid, scl_px) {
         dest_top -= scl_px;
     } else if (id == 'dest-down') {
         dest_top += scl_px;
+    } else if (id == 'overall-up') {
+        overall_top -= scl_px;
+    } else if (id == 'overall-down') {
+        overall_top += scl_px;
     }
 
     // 限界判定
@@ -69,8 +83,14 @@ function scroll(id, parentid, scl_px) {
         dest_top = up_limit_px;
     }
 
-    $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
-    $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+    if (overall_top <= train[parentid].overall) {
+        overall_top = train[parentid].overall;
+    } else if (overall_top >= up_limit_px) {
+        overall_top = up_limit_px;
+    }
+
+    // アニメーション
+    animation();
 
     // サーバーにデータ送信
     senddata(parentid);
@@ -80,9 +100,9 @@ function scroll(id, parentid, scl_px) {
 function holdscroll() {
     // id取得
     var id = $(this).attr("id");
-    var parentid = $(this).parent().attr("id");
+    var parentid = $(this).parent().parent().attr("id");
 
-    // スクロール(id振り分け)
+    // 判定(id振り分け)
     if (id == 'type-up') {
         type_top = train[parentid].type;
     } else if (id == 'type-down') {
@@ -91,10 +111,14 @@ function holdscroll() {
         dest_top = train[parentid].dest;
     } else if (id == 'dest-down') {
         dest_top = up_limit_px;
+    } else if (id == 'overall-up') {
+        overall_top = train[parentid].overall;
+    } else if (id == 'overall-down') {
+        overall_top = up_limit_px;
     }
 
-    $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
-    $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+    // アニメーション
+    animation();
 
     // サーバーにデータ送信
     senddata(parentid);
@@ -107,7 +131,7 @@ var clicked = false;    // クリック状態を保持するフラグ
 function clickjudge() {
     // ボタンの個別id取得
     var id = $(this).attr("id");
-    var parentid = $(this).parent().attr("id");
+    var parentid = $(this).parent().parent().attr("id");
 
     if (clicked) {
         // ダブルクリック時
@@ -129,10 +153,7 @@ function clickjudge() {
 
 // 初期位置に移動
 // 読み込み後実行
-$(window).on('load', function () {
-    $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
-    $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
-});
+$(window).on('load', animation());
 
 // ボタンがクリックされたとき
 $('.btn').on('click', clickjudge);
