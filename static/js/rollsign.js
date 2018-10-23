@@ -1,4 +1,4 @@
-// 設定
+// スクロール設定
 var click_scl_px = 64;   // クリック時スクロール量
 var dblclick_scl_px = 192;  // ダブルクリック時スクロール量
 var dr = 400;  // スクロール時間(ms)
@@ -6,30 +6,44 @@ var dr = 400;  // スクロール時間(ms)
 // 座標用(初期値:-64px)
 var type_top = -64;
 var dest_top = -64;
-var overall_top = -64
+var overall_top = 0;
 
-// 上限・下限値設定
+// 全面表示用フラグ(画像終端時:false)
+var overall_flg = false;
+
+// 全面表示するかの判定
+function overalljudge(parentid) {
+    if (overall_top > train[parentid].overall && overall_top < up_limit_px) {
+        overall_flg = true;
+    } else {
+        overall_flg = false;
+    }
+}
+
+// 座標上限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
 
-// 下限設定用コンストラクタ(種別,行先)
+// 座標下限設定用コンストラクタ(種別, 行先, 全面表示)
 function limitpx(_type, _dest, _overall) {
     this.type = _type;
     this.dest = _dest;
     this.overall = _overall;
 }
-// 種類ごとに下限値を設定
+
+// 車種ごとに座標下限値を設定
 var train = [];
 train["tobu10000"] = new limitpx(-384, -1280, -448);    // 東武10000系列
 
-// フォーム送信部 スクロール後に呼び出し
+// json送信部 スクロール後に呼び出し
 function senddata(parentid) {
 
     // json用オブジェクト
     var json = {
-        train_id: parentid,     // 電車のidを取得
+        train_id: parentid,     // 車種のidを取得
         type_pos: type_top,     // 種別の座標を取得
         dest_pos: dest_top,     // 行先の座標を取得
-        overall_pos: overall_top    // 全面表示の座標を取得
+        overall_pos: overall_top,   // 全面表示の座標を取得
+        overall_flg: overall_flg    // 全面表示のフラグ
     };
 
     // ajaxを用いて非同期通信
@@ -89,6 +103,9 @@ function scroll(id, parentid, scl_px) {
         overall_top = up_limit_px;
     }
 
+    // 全面表示判定
+    overalljudge(parentid);
+
     // アニメーション
     animation();
 
@@ -116,6 +133,9 @@ function holdscroll() {
     } else if (id == 'overall-down') {
         overall_top = up_limit_px;
     }
+
+    // 全面表示判定
+    overalljudge(parentid);
 
     // アニメーション
     animation();
