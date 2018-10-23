@@ -35,14 +35,16 @@ def tobu_10000():
 
 @app.route('/set', methods=['GET', 'POST'])
 def setimg():
+    # 送られてきたjsonを処理
     train_id = request.json["train_id"]
     type_pos = request.json["type_pos"]
     dest_pos = request.json["dest_pos"]
+
+    # debug
     app.logger.debug(train_id)
     app.logger.debug(type_pos)
     app.logger.debug(dest_pos)
-    return ""
-
+    return ""   # returnで何か返さないとエラー
 
 """
 @app.route('/post',methods=['GET','POST'])
