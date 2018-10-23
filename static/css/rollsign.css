@@ -1,6 +1,6 @@
 /*東武10000系列用*/
 
-#tobu10000 {
+.layer {
   position: relative;
   width: 256px;
   height: 192px;
@@ -9,16 +9,21 @@
   overflow: hidden;
 }
 
+.overall-thumb {
+  position: absolute;
+  width: 256px;
+}
+
 .tobu-thumb {
   position: absolute;
   width: 128px;
 }
 
-.tobu-gradient {
+.gradient {
   position: absolute;
   z-index: 3;
   margin: 0;
-  height: 192px;
+  height: 193px;
   width: 256px;
   /*
   background: -moz-linear-gradient(top, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
@@ -76,6 +81,42 @@
 
 .tobu-down::after {
   left: 56px;
+  width: 16px;
+  height: 16px;
+  border-top: 4px solid #c8c8c8;
+  border-right: 4px solid #c8c8c8;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.overall-up::before {
+  box-sizing: border-box;
+  width: 256px;
+  height: 32px;
+  /*background-color: rgba(255, 255, 255, 0.2);*/
+  /*border: 1px solid #FFF;*/
+}
+
+.overall-up::after {
+  left: 119px;
+  width: 16px;
+  height: 16px;
+  border-top: 4px solid #c8c8c8;
+  border-right: 4px solid #c8c8c8;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.overall-down::before {
+  box-sizing: border-box;
+  width: 256px;
+  height: 32px;
+  /*background-color: rgba(255, 255, 255, 0.2);*/
+  /*border: 1px solid #FFF;*/
+}
+
+.overall-down::after {
+  left: 119px;
   width: 16px;
   height: 16px;
   border-top: 4px solid #c8c8c8;
