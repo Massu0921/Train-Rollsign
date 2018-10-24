@@ -35,17 +35,13 @@
       </ul>
     </div>
   </nav>
-
-  {% block content %}{% endblock %}
   <!-- jQuery -->
   <script src="/static/js/jquery-3.3.1.min.js"></script>
   <!-- jQuery Mobile -->
   <script src="/static/js/jquery.mobile.event.min.js"></script>
   <!-- Bootstrap js -->
   <script src="/static/js/bootstrap.min.js"></script>
-  <!-- 行先表示用 -->
-  <script src="/static/js/rollsign.js"></script>
-
+  {% block content %}{% endblock %}
 </body>
 
 </html>
