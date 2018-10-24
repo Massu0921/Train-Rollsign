@@ -42,6 +42,7 @@ function senddata(parentid) {
         train_id: parentid,     // 車種のidを取得
         type_pos: type_top,     // 種別の座標を取得
         dest_pos: dest_top,     // 行先の座標を取得
+        dest_leftpos: $("#destination").attr('style'),
         overall_pos: overall_top,   // 全面表示の座標を取得
         overall_flg: overall_flg    // 全面表示のフラグ
     };
@@ -54,8 +55,6 @@ function senddata(parentid) {
         contentType: 'application/JSON',
         dataType: 'JSON'
     });
-
-    //console.log(json);
 
 }
 
