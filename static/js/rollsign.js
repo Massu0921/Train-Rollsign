@@ -11,15 +11,6 @@ var overall_top = 0;
 // 全面表示用フラグ(画像終端時:false)
 var overall_flg = false;
 
-// 全面表示するかの判定
-function overalljudge(parentid) {
-    if (overall_top > train[parentid].overall && overall_top < up_limit_px) {
-        overall_flg = true;
-    } else {
-        overall_flg = false;
-    }
-}
-
 // 座標上限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
 
@@ -33,6 +24,15 @@ function limitpx(_type, _dest, _overall) {
 // 車種ごとに座標下限値を設定
 var train = [];
 train["tobu10000"] = new limitpx(-384, -1280, -448);    // 東武10000系列
+
+// 全面表示するかの判定
+function overalljudge(parentid) {
+    if (overall_top > train[parentid].overall && overall_top < up_limit_px) {
+        overall_flg = true;
+    } else {
+        overall_flg = false;
+    }
+}
 
 // json送信部 スクロール後に呼び出し
 function senddata(parentid) {
@@ -48,9 +48,9 @@ function senddata(parentid) {
 
     // ajaxを用いて非同期通信
     $.ajax({
-        url: '/set',
+        url: '/send',   // 送信URL
         type: 'post',
-        data: JSON.stringify(json),
+        data: JSON.stringify(json), // オブジェクトをjsonに
         contentType: 'application/JSON',
         dataType: 'JSON'
     });
@@ -173,7 +173,14 @@ function clickjudge() {
 
 // 初期位置に移動
 // 読み込み後実行
-$(window).on('load', animation());
+$(window).on('load', function(){
+    // 車種取得
+    var train_id = $(".train-name").attr("id");
+    //console.log(train_id);
+    // 初期データ送信
+    senddata(train_id);
+    animation();
+});
 
 // ボタンがクリックされたとき
 $('.btn').on('click', clickjudge);
