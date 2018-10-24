@@ -14,8 +14,7 @@ led = None
 @app.route('/')
 def index():
     global led
-    title = 'Welcome'
-    message = 'Text Message'
+
     """
     if led == None:
         led = LED()
@@ -35,10 +34,14 @@ def tobu_10000():
 
 @app.route('/send', methods=['GET', 'POST'])
 def setimg():
+    #
+    data = request.json
+    app.logger.debug(data)
     # 送られてきたjsonを処理
     train_id = request.json["train_id"]
     type_pos = request.json["type_pos"]
     dest_pos = request.json["dest_pos"]
+    #dest_leftpos = request.json["dest_leftpos"]
     overall_pos = request.json["overall_pos"]
     overall_flg = request.json["overall_flg"]
 
@@ -46,29 +49,12 @@ def setimg():
     app.logger.debug(train_id)
     app.logger.debug(type_pos)
     app.logger.debug(dest_pos)
+    # app.logger.debug(dest_leftpos)
     app.logger.debug(overall_pos)
     app.logger.debug(overall_flg)
     return ""   # returnで何か返さないとエラー
 
-"""
-@app.route('/post',methods=['GET','POST'])
-def post():
-    global led
-    title = 'Hello'
-    if request.method == 'POST':
-        name = request.form['name']
-        text = name + u'さん、ようこそ'
 
-        try:
-            led.scroll_text(text)
-        except AttributeError: pass
-
-        # レンダリング
-        return render_template('index.html',name=name, title=title)
-    else:
-        # リダイレクト
-        return redirect(url_for('index'))
-"""
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=8000, threaded=True)
