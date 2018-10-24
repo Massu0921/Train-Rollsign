@@ -33,7 +33,7 @@ def tobu_10000():
     return render_template('tobu_10000.html')
 
 
-@app.route('/set', methods=['GET', 'POST'])
+@app.route('/send', methods=['GET', 'POST'])
 def setimg():
     # 送られてきたjsonを処理
     train_id = request.json["train_id"]
