@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
 import time
+import re
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from PIL import Image, ImageDraw, ImageSequence
 
 
-class LED(object):
+class Edit(object):     # 編集用
+    # 座標・型変換
+    @staticmethod
+    def fixdata(data):
+        data["type_pos"] = (data["type_pos"] - 64) / 2
+        data["dest_pos"] = (data["dest_pos"] - 64) / 2
+        data["overall_pos"] = (data["overall_pos"] - 64) / 2
+        dest_leftpos = re.search(r'\d+', data["dest_leftpos"])
+        data["dest_leftpos"] = int(dest_leftpos.group(0)) / 2
+        return data
+
+
+class LED(object):      # LED表示器用
 
     # Setup LEDs
     def __init__(self, chain=4, bright=50):  # デフォルト設定（引数なしの場合）
@@ -30,17 +43,40 @@ class LED(object):
         self._width = self.canvas.width
         self._height = self.canvas.height
 
-    def scroll_text(self, text):
-        x = self._width
-        while 1:
-            self.canvas.Clear()
-            len = graphics.DrawText(
-                self.canvas, self.gothic, x, 30, self.white, text)
-            if x + len < 0:
-                break
-            x -= 1
-            time.sleep(0.01)
-            self.canvas = self.matrix.SwapOnVSync(self.canvas)
+    # 車種から画像を選択、開く
+    def select(self, data):
+        # path
+        path = {
+            "common": "static/images/",
+            "type": "_type.png",
+            "dest": "_dest.png",
+            "overall": "_overall.png"
+        }
 
+        # open imgs
+        type_path = path["common"] + data["train_id"] + path["type"]
+        dest_path = path["common"] + data["train_id"] + path["dest"]
+        overall_path = path["common"] + data["train_id"] + path["overall"]
+
+        self.type_img = Image.open(type_path).convert('RGB')
+        self.dest_img = Image.open(dest_path).convert('RGB')
+        self.overall_img = Image.open(overall_path).convert('RGB')
+
+    # 表示
+    def display(self, data):
+        self.canvas.Clear()
+
+        self.canvas.SetImage(self.type_img, 0, data["type_pos"])
+        self.canvas.SetImage(
+            self.dest_img, data["dest_leftpos"], data["dest_pos"])
+
+        # 全面表示する場合
+        if data["overall_flg"]:
+            self.canvas.SetImage(self.overall_img, 0, data["overall_pos"])
+
+        self.canvas = self.matrix.SwapOnVSync(self.canvas)
+
+    # 表示初期化
+    def clear(self):
         self.canvas.Clear()
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
