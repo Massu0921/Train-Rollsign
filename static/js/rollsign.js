@@ -3,27 +3,32 @@ var click_scl_px = 64;   // クリック時スクロール量
 var dblclick_scl_px = 192;  // ダブルクリック時スクロール量
 var dr = 400;  // スクロール時間(ms)
 
-// 座標用(初期値:-64px)
+// 座標用(初期値:-64px 全面表示は0px)
 var type_top = -64;
 var dest_top = -64;
+var line_top = -64;
 var overall_top = 0;
 
 // 全面表示用フラグ(画像終端時:false)
 var overall_flg = false;
 
+//var 
+
 // 座標上限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
 
-// 座標下限設定用コンストラクタ(種別, 行先, 全面表示)
-function limitpx(_type, _dest, _overall) {
+// 座標下限設定用コンストラクタ(種別, 行先,路線, 全面表示)
+function limitpx(_type, _dest, _line, _overall) {
     this.type = _type;
     this.dest = _dest;
+    this.line = _line;
     this.overall = _overall;
 }
 
 // 車種ごとに座標下限値を設定
 var train = [];
-train["tobu_10000"] = new limitpx(-384, -1280, -448);    // 東武10000系列
+train["tobu_10000"] = new limitpx(-384, -1280, 0, -448);    // 東武10000系列
+
 
 // 全面表示するかの判定
 function overalljudge(parentid) {
@@ -172,7 +177,7 @@ function clickjudge() {
 
 // 初期位置に移動
 // 読み込み後実行
-$(window).on('load', function(){
+$(window).on('load', function () {
     // 車種取得
     var train_id = $(".train-name").attr("id");
     //console.log(train_id);
@@ -182,6 +187,7 @@ $(window).on('load', function(){
 });
 
 // ボタンがクリックされたとき
-$('.btn').on('click', clickjudge);
+$('.roll-btn').on('click', clickjudge);
 // ボタンが長押しされたとき
-$('.btn').on('taphold', holdscroll);
+$('.roll-btn').on('taphold', holdscroll);
+
