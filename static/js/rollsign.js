@@ -27,12 +27,13 @@ function limitpx(_type, _dest, _line, _overall) {
     this.dest = _dest;
     this.line = _line;
     this.overall = _overall;
+    this.dest_left = _dest_left;
 }
 
 // 車種ごとに座標下限値を設定
 var train = [];
-train["tobu_10000"] = new limitpx(-384, -1280, 0, -448);    // 東武10000系列
-train["E233-3000"] = new limitpx(-128, -128, -128, -128);    // E233-3000
+train["tobu_10000"] = new limitpx(-384, -1280, 0, -448, 128);    // 東武10000系列
+train["E233-3000"] = new limitpx(-128, -128, -128, -128, 96);    // E233-3000
 
 
 // 全面表示するかの判定
@@ -53,7 +54,7 @@ function senddata(parentid) {
         type_pos: type_top,     // 種別の座標を取得
         dest_pos: dest_top,     // 行先の座標を取得
         line_pos: line_top,     // 路線の座標を取得
-        dest_leftpos: $("#destination").attr('style'),
+        dest_leftpos: train[parentid].dest_left,    // 行先・路線表示の横座標
         overall_pos: overall_top,   // 全面表示の座標を取得
         overall_flg: overall_flg,   // 全面表示のフラグ
         alternate_flg: alternate_flg,   // 交互表示のフラグ
