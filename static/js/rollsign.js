@@ -22,7 +22,7 @@ var mode = 'dest';
 var up_limit_px = 0;   // スクロール上限値(共通値)
 
 // 座標下限設定用コンストラクタ(種別, 行先,路線, 全面表示)
-function limitpx(_type, _dest, _line, _overall) {
+function limitpx(_type, _dest, _line, _overall, _dest_left) {
     this.type = _type;
     this.dest = _dest;
     this.line = _line;
