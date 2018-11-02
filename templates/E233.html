@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <div id="train-name" class="m-4">
-    <div class="container m-2">
+  <div style="margin: 20px 20px;">
+    <div class="container">
       <div class="row">
         <h4>E233系3000番台</h4>
       </div>
@@ -35,11 +35,11 @@
       <img src="/static/images/E233-3000_line.png" id="line" class="E233-dest-thumb" style="left: 256px;">
 
       <!-- 種別移動用ボタン -->
-      <!--<div id="type-up" class="btn tobu-up" style="top: 16px; left: 0px;"></div>
-      <div id="type-down" class="btn tobu-down" style="bottom: 16px; left: 0px;"></div>-->
+      <div id="type-up" class="roll-btn tobu-up" style="top: 16px; left: 0px;"></div>
+      <div id="type-down" class="roll-btn tobu-down" style="bottom: 16px; left: 0px;"></div>
       <!-- 行先移動用ボタン -->
-      <!--<div id="dest-up" class="btn tobu-up" style="top: 16px; left: 128px;"></div>
-      <div id="dest-down" class="btn tobu-down" style="bottom: 16px; left: 128px;"></div>-->
+      <div id="dest-up" class="roll-btn tobu-up" style="top: 16px; left: 128px;"></div>
+      <div id="dest-down" class="roll-btn tobu-down" style="bottom: 16px; left: 128px;"></div>
     </div>
 
     <div class="normal-layer">
@@ -48,15 +48,13 @@
       <!-- 種別・行先画像 -->
       <img src="/static/images/E233-3000_overall.png" id="overall" class="overall-thumb" style="">
       <!-- 全面表示移動用ボタン -->
-      <div id="overall-up" class="btn overall-up" style="top: 16px; left: 0px;"></div>
-      <div id="overall-down" class="btn overall-down" style="bottom: 16px; left: 0px;"></div>
+      <div id="overall-up" class="roll-btn overall-up" style="top: 16px; left: 0px;"></div>
+      <div id="overall-down" class="roll-btn overall-down" style="bottom: 16px; left: 0px;"></div>
     </div>
   </div>
   <!-- 行先表示用 -->
-  <!--<script src="/static/js/rollsign.js"></script>-->
-  <script>$("#ck-alternate").on('click', function() {
-    console.log($(this).prop("checked"))
-  })</script>
+  <script src="/static/js/rollsign.js"></script>
+
 </body>
 
 {% endblock %}

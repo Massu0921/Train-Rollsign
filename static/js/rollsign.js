@@ -12,7 +12,11 @@ var overall_top = 0;
 // 全面表示用フラグ(画像終端時:false)
 var overall_flg = false;
 
-//var 
+// 交互表示フラグ
+var alternate_flg = false;
+
+// 表示切り替え用
+var mode = 'destination';
 
 // 座標上限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
@@ -28,6 +32,7 @@ function limitpx(_type, _dest, _line, _overall) {
 // 車種ごとに座標下限値を設定
 var train = [];
 train["tobu_10000"] = new limitpx(-384, -1280, 0, -448);    // 東武10000系列
+train["E233-3000"] = new limitpx(-128, -128, -128, -128);    // E233-3000
 
 
 // 全面表示するかの判定
@@ -47,9 +52,12 @@ function senddata(parentid) {
         train_id: parentid,     // 車種のidを取得
         type_pos: type_top,     // 種別の座標を取得
         dest_pos: dest_top,     // 行先の座標を取得
+        line_pos: line_top,     // 路線の座標を取得
         dest_leftpos: $("#destination").attr('style'),
         overall_pos: overall_top,   // 全面表示の座標を取得
-        overall_flg: overall_flg    // 全面表示のフラグ
+        overall_flg: overall_flg,   // 全面表示のフラグ
+        alternate_flg: alternate_flg,   // 交互表示のフラグ
+        mode: mode      // 表示切り替え
     };
 
     // ajaxを用いて非同期通信
@@ -67,6 +75,7 @@ function senddata(parentid) {
 function animation() {
     $("#type").animate({ top: type_top + "px" }, { duration: dr }, { complete: function () { } });
     $("#destination").animate({ top: dest_top + "px" }, { duration: dr }, { complete: function () { } });
+    $("#line").animate({ top: line_top + "px" }, { duration: dr }, { complete: function () { } });
     $("#overall").animate({ top: overall_top + "px" }, { duration: dr }, { complete: function () { } });
 }
 
@@ -79,9 +88,11 @@ function scroll(id, parentid, scl_px) {
     } else if (id == 'type-down') {
         type_top += scl_px;
     } else if (id == 'dest-up') {
-        dest_top -= scl_px;
+        if (mode == 'destination') dest_top -= scl_px;
+        else if (mode == 'line') line_top -= scl_px;
     } else if (id == 'dest-down') {
-        dest_top += scl_px;
+        if (mode == 'destination') dest_top += scl_px;
+        else if (mode == 'line') line_top += scl_px;
     } else if (id == 'overall-up') {
         overall_top -= scl_px;
     } else if (id == 'overall-down') {
@@ -99,6 +110,12 @@ function scroll(id, parentid, scl_px) {
         dest_top = train[parentid].dest;
     } else if (dest_top >= up_limit_px) {
         dest_top = up_limit_px;
+    }
+
+    if (line_top <= train[parentid].line) {
+        line_top = train[parentid].line;
+    } else if (line_top >= up_limit_px) {
+        line_top = up_limit_px;
     }
 
     if (overall_top <= train[parentid].overall) {
@@ -129,9 +146,11 @@ function holdscroll() {
     } else if (id == 'type-down') {
         type_top = up_limit_px;
     } else if (id == 'dest-up') {
-        dest_top = train[parentid].dest;
+        if (mode == 'destination') dest_top = train[parentid].dest;
+        else if (mode == 'line') line_top = train[parentid].line;
     } else if (id == 'dest-down') {
-        dest_top = up_limit_px;
+        if (mode == 'destination') dest_top = up_limit_px;
+        else if (mode == 'line') line_top = up_limit_px;
     } else if (id == 'overall-up') {
         overall_top = train[parentid].overall;
     } else if (id == 'overall-down') {
@@ -191,3 +210,24 @@ $('.roll-btn').on('click', clickjudge);
 // ボタンが長押しされたとき
 $('.roll-btn').on('taphold', holdscroll);
 
+// 行先・路線表示切替
+$("#change-btn").on('click', function () {
+    if (mode == 'destination') {
+        mode = 'line';
+        $("#destination").animate({ left: 256 + "px" }, { duration: dr }, { complete: function () { } });
+        $("#line").animate({ left: 96 + "px" }, { duration: dr }, { complete: function () { } });
+    } else {
+        mode = 'destination';
+        $("#destination").animate({ left: 96 + "px" }, { duration: dr }, { complete: function () { } });
+        $("#line").animate({ left: 256 + "px" }, { duration: dr }, { complete: function () { } });
+    }
+    var parentid = $(document).find('.train-name').attr('id');
+    senddata(parentid);
+});
+
+// 交互表示ボタン
+$("#ck-alternate").on('click', function () {
+    alternate_flg = $(this).prop("checked");
+    var parentid = $(document).find('.train-name').attr('id');
+    senddata(parentid);
+});
