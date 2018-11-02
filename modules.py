@@ -66,7 +66,10 @@ class LED(object):      # LED表示器用
 
         self.type_img = Image.open(type_path).convert('RGB')
         self.dest_img = Image.open(dest_path).convert('RGB')
-        self.line_img = Image.open(line_path).convert('RGB')
+        try:
+            self.line_img = Image.open(line_path).convert('RGB')
+        except:
+            pass
         self.overall_img = Image.open(overall_path).convert('RGB')
 
     # 表示
@@ -74,8 +77,12 @@ class LED(object):      # LED表示器用
         self.canvas.Clear()
 
         self.canvas.SetImage(self.type_img, 0, data["type_pos"])
-        self.canvas.SetImage(
-            self.dest_img, data["dest_leftpos"], data[data["mode"] + "_pos"])
+        if data["mode"] == 'dest':
+            self.canvas.SetImage(
+                self.dest_img, data["dest_leftpos"], data["dest_pos"])
+        elif data["mode"] == 'line':
+            self.canvas.SetImage(
+                self.line_img, data["dest_leftpos"], data["line_pos"])
 
         # 全面表示する場合
         if data["overall_flg"]:
@@ -96,7 +103,7 @@ class LED(object):      # LED表示器用
                     self.dest_img, data["dest_leftpos"], data["dest_pos"])
             elif cnt >= 30:
                 self.canvas.SetImage(
-                    self.dest_img, data["dest_leftpos"], data["line_pos"])
+                    self.line_img, data["dest_leftpos"], data["line_pos"])
 
             if cnt >= 60:
                 cnt = 0
