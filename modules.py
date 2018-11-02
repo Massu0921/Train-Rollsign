@@ -13,7 +13,8 @@ class Edit(object):     # 編集用
         data["dest_pos"] = (data["dest_pos"] - 64) / 2
         data["line_pos"] = (data["line_pos"] - 64) / 2
         data["overall_pos"] = (data["overall_pos"] - 64) / 2
-        dest_leftpos = re.search(r'\d+', data["dest_leftpos"])
+        data["dest_leftpos"] = data["dest_leftpos"] / 2
+        #dest_leftpos = re.search(r'\d+', data["dest_leftpos"])
         data["dest_leftpos"] = int(dest_leftpos.group(0)) / 2
         return data
 
