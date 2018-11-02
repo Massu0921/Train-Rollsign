@@ -37,6 +37,7 @@ def setimg():
     #
     data = request.json
     app.logger.debug(data)
+    """
     # 送られてきたjsonを処理
     train_id = request.json["train_id"]
     type_pos = request.json["type_pos"]
@@ -52,6 +53,7 @@ def setimg():
     # app.logger.debug(dest_leftpos)
     app.logger.debug(overall_pos)
     app.logger.debug(overall_flg)
+    """
     return ""   # returnで何か返さないとエラー
 
 
