@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+import threading
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
 from modules import *
 from flask import Flask, render_template, request, redirect, url_for, json
@@ -13,13 +14,13 @@ led = None
 @app.route('/')
 def index():
     global led
-    
+
     # LEDインスタンス未生成時
     if led == None:
         led = LED()
 
     led.clear()
-    
+
     return render_template('index.html')
 
 
@@ -41,7 +42,13 @@ def send():
 
     # 画像読み込み・LED表示
     led.select(data)
-    led.display(data)
+
+    if led.alt_flg:
+        th_alt = threading.Thread(target=led.alt_display,args=(data,))
+        th_alt.setDaemon(True)
+        th_alt.start()
+    else:   
+        led.display(data)
 
     return ""   # returnで何か返さないとエラー
 

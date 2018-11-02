@@ -11,6 +11,7 @@ class Edit(object):     # 編集用
     def fixdata(data):
         data["type_pos"] = (data["type_pos"] - 64) / 2
         data["dest_pos"] = (data["dest_pos"] - 64) / 2
+        data["line_pos"] = (data["line_pos"] - 64) / 2
         data["overall_pos"] = (data["overall_pos"] - 64) / 2
         dest_leftpos = re.search(r'\d+', data["dest_leftpos"])
         data["dest_leftpos"] = int(dest_leftpos.group(0)) / 2
@@ -45,21 +46,27 @@ class LED(object):      # LED表示器用
 
     # 車種から画像を選択、開く
     def select(self, data):
+        # 交互表示用フラグ 先に設定し、既存のループを止める
+        self.alt_flg = data["alternate_flg"]
+
         # path
         path = {
             "common": "static/images/",
             "type": "_type.png",
             "dest": "_dest.png",
+            "line": "_line.png",
             "overall": "_overall.png"
         }
 
         # open imgs
         type_path = path["common"] + data["train_id"] + path["type"]
         dest_path = path["common"] + data["train_id"] + path["dest"]
+        line_path = path["common"] + data["train_id"] + path["line"]
         overall_path = path["common"] + data["train_id"] + path["overall"]
 
         self.type_img = Image.open(type_path).convert('RGB')
         self.dest_img = Image.open(dest_path).convert('RGB')
+        self.line_img = Image.open(line_path).convert('RGB')
         self.overall_img = Image.open(overall_path).convert('RGB')
 
     # 表示
@@ -68,13 +75,35 @@ class LED(object):      # LED表示器用
 
         self.canvas.SetImage(self.type_img, 0, data["type_pos"])
         self.canvas.SetImage(
-            self.dest_img, data["dest_leftpos"], data["dest_pos"])
+            self.dest_img, data["dest_leftpos"], data[data["mode"] + "_pos"])
 
         # 全面表示する場合
         if data["overall_flg"]:
             self.canvas.SetImage(self.overall_img, 0, data["overall_pos"])
 
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
+
+    def alt_display(self, data):
+        cnt = 0
+        while self.alt_flg:
+            self.canvas.Clear()
+
+            self.canvas.SetImage(self.type_img, 0, data["type_pos"])
+
+            # 行先・路線交互表示
+            if cnt < 30:
+                self.canvas.SetImage(
+                    self.dest_img, data["dest_leftpos"], data["dest_pos"])
+            elif cnt >= 30:
+                self.canvas.SetImage(
+                    self.dest_img, data["dest_leftpos"], data["line_pos"])
+
+            if cnt >= 60:
+                cnt = 0
+
+            self.canvas = self.matrix.SwapOnVSync(self.canvas)
+            cnt += 1
+            time.sleep(0.1)
 
     # 表示初期化
     def clear(self):

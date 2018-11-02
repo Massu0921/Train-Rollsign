@@ -16,7 +16,7 @@ var overall_flg = false;
 var alternate_flg = false;
 
 // 表示切り替え用
-var mode = 'destination';
+var mode = 'dest';
 
 // 座標上限値設定
 var up_limit_px = 0;   // スクロール上限値(共通値)
@@ -88,10 +88,10 @@ function scroll(id, parentid, scl_px) {
     } else if (id == 'type-down') {
         type_top += scl_px;
     } else if (id == 'dest-up') {
-        if (mode == 'destination') dest_top -= scl_px;
+        if (mode == 'dest') dest_top -= scl_px;
         else if (mode == 'line') line_top -= scl_px;
     } else if (id == 'dest-down') {
-        if (mode == 'destination') dest_top += scl_px;
+        if (mode == 'dest') dest_top += scl_px;
         else if (mode == 'line') line_top += scl_px;
     } else if (id == 'overall-up') {
         overall_top -= scl_px;
@@ -146,10 +146,10 @@ function holdscroll() {
     } else if (id == 'type-down') {
         type_top = up_limit_px;
     } else if (id == 'dest-up') {
-        if (mode == 'destination') dest_top = train[parentid].dest;
+        if (mode == 'dest') dest_top = train[parentid].dest;
         else if (mode == 'line') line_top = train[parentid].line;
     } else if (id == 'dest-down') {
-        if (mode == 'destination') dest_top = up_limit_px;
+        if (mode == 'dest') dest_top = up_limit_px;
         else if (mode == 'line') line_top = up_limit_px;
     } else if (id == 'overall-up') {
         overall_top = train[parentid].overall;
@@ -212,12 +212,12 @@ $('.roll-btn').on('taphold', holdscroll);
 
 // 行先・路線表示切替
 $("#change-btn").on('click', function () {
-    if (mode == 'destination') {
+    if (mode == 'dest') {
         mode = 'line';
         $("#destination").animate({ left: 256 + "px" }, { duration: dr }, { complete: function () { } });
         $("#line").animate({ left: 96 + "px" }, { duration: dr }, { complete: function () { } });
     } else {
-        mode = 'destination';
+        mode = 'dest';
         $("#destination").animate({ left: 96 + "px" }, { duration: dr }, { complete: function () { } });
         $("#line").animate({ left: 256 + "px" }, { duration: dr }, { complete: function () { } });
     }
