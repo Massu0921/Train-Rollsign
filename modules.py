@@ -50,6 +50,7 @@ class LED(object):      # LED表示器用
         # 交互表示用フラグ 先に設定し、既存のループを止める
         self.alt_flg = data["alternate_flg"]
         time.sleep(0.11)    # ループ終了待機
+        
         # path
         path = {
             "common": "static/images/",

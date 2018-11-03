@@ -10,6 +10,7 @@ from flask import Flask, render_template, request, redirect, url_for, json
 app = Flask(__name__)
 led = None
 
+alt_save = False    # ループ表示多重起動防止
 
 @app.route('/')
 def index():
@@ -36,6 +37,7 @@ def tobu_10000():
 
 @app.route('/send', methods=['GET', 'POST'])
 def send():
+    global alt_save
     # 送られてきたjsonを処理
     data = request.json     # json取得（辞書型）
     data = Edit.fixdata(data)
@@ -43,12 +45,17 @@ def send():
     # 画像読み込み・LED表示
     led.select(data)
 
-    if led.alt_flg:
+    if led.alt_flg and not alt_save:
         th_alt = threading.Thread(target=led.alt_display,args=(data,))
         th_alt.setDaemon(True)
         th_alt.start()
-    else:   
+    elif not led.alt_flg:
         led.display(data)
+
+    if led.alt_flg:
+        alt_save = True
+    else:
+        alt_save = False
 
     return ""   # returnで何か返さないとエラー
 
