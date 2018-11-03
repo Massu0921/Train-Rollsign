@@ -46,12 +46,12 @@ def send():
     led.select(data)
 
     if led.alt_flg and not alt_save:
-        th_alt = threading.Thread(target=led.alt_display,args=(data,))
+        th_alt = threading.Thread(target=led.alt_display)
         th_alt.setDaemon(True)
         th_alt.start()
-        
+
     elif not led.alt_flg:
-        led.display(data)
+        led.display()
 
     if led.alt_flg:
         alt_save = True
