@@ -50,7 +50,7 @@ class LED(object):      # LED表示器用
         # 交互表示用フラグ 先に設定し、既存のループを止める
         self.alt_flg = data["alternate_flg"]
         time.sleep(0.11)    # ループ終了待機
-        
+
         # path
         path = {
             "common": "static/images/",
@@ -73,39 +73,41 @@ class LED(object):      # LED表示器用
         except:
             pass
         self.overall_img = Image.open(overall_path).convert('RGB')
+        
+        self.data = data
 
     # 表示
-    def display(self, data):
+    def display(self):
         self.canvas.Clear()
 
-        self.canvas.SetImage(self.type_img, 0, data["type_pos"])
-        if data["mode"] == 'dest':
+        self.canvas.SetImage(self.type_img, 0, self.data["type_pos"])
+        if self.data["mode"] == 'dest':
             self.canvas.SetImage(
-                self.dest_img, data["dest_leftpos"], data["dest_pos"])
-        elif data["mode"] == 'line':
+                self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"])
+        elif self.data["mode"] == 'line':
             self.canvas.SetImage(
-                self.line_img, data["dest_leftpos"], data["line_pos"])
+                self.line_img, self.data["dest_leftpos"], self.data["line_pos"])
 
         # 全面表示する場合
-        if data["overall_flg"]:
-            self.canvas.SetImage(self.overall_img, 0, data["overall_pos"])
+        if self.data["overall_flg"]:
+            self.canvas.SetImage(self.overall_img, 0, self.data["overall_pos"])
 
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
-    def alt_display(self, data):
+    def alt_display(self):
         cnt = 0
         while self.alt_flg:
             self.canvas.Clear()
 
-            self.canvas.SetImage(self.type_img, 0, data["type_pos"])
+            self.canvas.SetImage(self.type_img, 0, self.data["type_pos"])
 
             # 行先・路線交互表示
             if cnt < 30:
                 self.canvas.SetImage(
-                    self.dest_img, data["dest_leftpos"], data["dest_pos"])
+                    self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"])
             elif cnt >= 30:
                 self.canvas.SetImage(
-                    self.line_img, data["dest_leftpos"], data["line_pos"])
+                    self.line_img, self.data["dest_leftpos"], self.data["line_pos"])
 
             if cnt >= 60:
                 cnt = 0

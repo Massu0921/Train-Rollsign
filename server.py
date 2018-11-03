@@ -49,6 +49,7 @@ def send():
         th_alt = threading.Thread(target=led.alt_display,args=(data,))
         th_alt.setDaemon(True)
         th_alt.start()
+        
     elif not led.alt_flg:
         led.display(data)
 
