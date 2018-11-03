@@ -33,7 +33,7 @@ function limitpx(_type, _dest, _line, _overall, _dest_left) {
 // 車種ごとに座標下限値を設定
 var train = [];
 train["tobu_10000"] = new limitpx(-384, -1280, 0, -448, 128);    // 東武10000系列
-train["E233-3000"] = new limitpx(-128, -128, -128, -128, 96);    // E233-3000
+train["E233-3000"] = new limitpx(-128, -1028, -128, -128, 96);    // E233-3000
 
 
 // 全面表示するかの判定
