@@ -23,7 +23,7 @@ function limitpx(_type, _dest, _overall) {
 
 // 車種ごとに座標下限値を設定
 var train = [];
-train["tobu_10000"] = new limitpx(-384, -1280, -448);    // 東武10000系列
+train["tobu_10000"] = new limitpx(-384, -1344, -448);    // 東武10000系列
 
 // 全面表示するかの判定
 function overalljudge(parentid) {
