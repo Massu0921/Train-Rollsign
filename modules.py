@@ -22,7 +22,7 @@ class Edit(object):     # 編集用
 class LED(object):      # LED表示器用
 
     # Setup LEDs
-    def __init__(self, chain=4, bright=40):  # デフォルト設定（引数なしの場合）
+    def __init__(self, chain=4, bright=30):  # デフォルト設定（引数なしの場合）
         # Options
         self.options = RGBMatrixOptions()
         self.options.rows = 32
