@@ -17,7 +17,7 @@
   width: 160px;
 }
 
-.normal-layer {
+.layer {
   position: relative;
   width: 256px;
   height: 192px;
@@ -36,7 +36,7 @@
   width: 128px;
 }
 
-.normal-gradient {
+.gradient {
   position: absolute;
   z-index: 3;
   margin: 0;
