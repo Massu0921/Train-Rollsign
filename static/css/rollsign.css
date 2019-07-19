@@ -1,4 +1,21 @@
-/*東武10000系列用*/
+.E233-3000-layer {
+  position: relative;
+  width: 416px;
+  height: 192px;
+  border: 0px solid black;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.E233-type-thumb {
+  position: absolute;
+  width: 96px;
+}
+
+.E233-dest-thumb {
+  position: absolute;
+  width: 160px;
+}
 
 .layer {
   position: relative;
@@ -32,7 +49,7 @@
   background: linear-gradient(to bottom, #000, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, #000);
 }
 
-.btn {
+.roll-btn {
   position: absolute;
   display: inline-block;
   padding: 0 0 0 16px;
@@ -43,7 +60,7 @@
   font-size: 15px;
 }
 
-.btn::before, .btn::after {
+.roll-btn::before, .roll-btn::after {
   position: absolute;
   top: 0;
   bottom: 0;
