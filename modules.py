@@ -29,6 +29,7 @@ class LED(object):      # LED表示器用
         self.options.hardware_mapping = 'adafruit-hat-pwm'
         self.options.brightness = bright
         self.options.show_refresh_rate = 0
+        self.options.disable_hardware_pulsing = 1   # sound module無効化
         self.matrix = RGBMatrix(options=self.options)
         self.canvas = self.matrix.CreateFrameCanvas()
 
