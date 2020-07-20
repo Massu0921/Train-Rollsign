@@ -4,7 +4,7 @@ import os
 import time
 import threading
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '../'))
-from modules import *
+from modules import LED, Edit
 from flask import Flask, render_template, request, redirect, url_for, json
 
 app = Flask(__name__)
