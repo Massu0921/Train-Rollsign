@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import subprocess
 import time
 import re
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
@@ -32,6 +33,17 @@ class LED(object):      # LED表示器用
         self.options.brightness = bright
         self.options.show_refresh_rate = 0
         self.options.disable_hardware_pulsing = 0
+
+        # ラズパイ判別
+        model = subprocess.run(
+            ["cat", "/proc/device-tree/model"], encoding='utf-8', stdout=subprocess.PIPE)
+        # Pi4の場合, SetImageのunsafeを有効, gpio速度低下
+        if "Raspberry Pi 4" in model.stdout:
+            self.__unsafe = False
+            self.options.gpio_slowdown = 2
+        else:
+            self.__unsafe = True
+
         self.matrix = RGBMatrix(options=self.options)
         self.canvas = self.matrix.CreateFrameCanvas()
 
@@ -74,24 +86,26 @@ class LED(object):      # LED表示器用
         except:
             pass
         self.overall_img = Image.open(overall_path).convert('RGB')
-        
+
         self.data = data
 
     # 表示
     def display(self):
         self.canvas.Clear()
 
-        self.canvas.SetImage(self.type_img, 0, self.data["type_pos"])
+        self.canvas.SetImage(
+            self.type_img, 0, self.data["type_pos"], unsafe=self.__unsafe)
         if self.data["mode"] == 'dest':
             self.canvas.SetImage(
-                self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"])
+                self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"], unsafe=self.__unsafe)
         elif self.data["mode"] == 'line':
             self.canvas.SetImage(
-                self.line_img, self.data["dest_leftpos"], self.data["line_pos"])
+                self.line_img, self.data["dest_leftpos"], self.data["line_pos"], unsafe=self.__unsafe)
 
         # 全面表示する場合
         if self.data["overall_flg"]:
-            self.canvas.SetImage(self.overall_img, 0, self.data["overall_pos"])
+            self.canvas.SetImage(
+                self.overall_img, 0, self.data["overall_pos"], unsafe=self.__unsafe)
 
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
 
@@ -100,15 +114,16 @@ class LED(object):      # LED表示器用
         while self.alt_flg:
             self.canvas.Clear()
 
-            self.canvas.SetImage(self.type_img, 0, self.data["type_pos"])
+            self.canvas.SetImage(
+                self.type_img, 0, self.data["type_pos"], unsafe=self.__unsafe)
 
             # 行先・路線交互表示
             if cnt < 30:
                 self.canvas.SetImage(
-                    self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"])
+                    self.dest_img, self.data["dest_leftpos"], self.data["dest_pos"], unsafe=self.__unsafe)
             elif cnt >= 30:
                 self.canvas.SetImage(
-                    self.line_img, self.data["dest_leftpos"], self.data["line_pos"])
+                    self.line_img, self.data["dest_leftpos"], self.data["line_pos"], unsafe=self.__unsafe)
 
             if cnt >= 60:
                 cnt = 0
